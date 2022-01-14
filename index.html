@@ -72,6 +72,7 @@ function loadNotas(aluno){
         var nome=value['nome'];
         var peso=value['peso'];
         var nota=value['nota'];
+        var etapa=value['etapa'];
         var feedback=value['feedback'];
         
         if(nome === undefined){
@@ -84,11 +85,17 @@ function loadNotas(aluno){
         node.classList.add('titulo')
         node.innerHTML =nome;
         div.appendChild(node);
+
         var node = document.createElement('div');
-        node.innerHTML =`nota: ${nota} de 100 pontos`;
+        node.innerHTML =`Etapa: ${etapa}`;
         div.appendChild(node);
+
         var node = document.createElement('div');
         node.innerHTML =`peso: ${peso} %`;
+        div.appendChild(node);
+
+        var node = document.createElement('div');
+        node.innerHTML =`nota: <b>${nota}</b> de 100 pontos`;
         div.appendChild(node);
 
         raiz.appendChild(div);
