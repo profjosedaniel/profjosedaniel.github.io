@@ -19,6 +19,10 @@
     .titulo{
         color:red;
     }
+    .nota{
+        margin:10px;
+        border:3px black solid;
+    }
     ></style>
 </head>
 <body>
@@ -73,18 +77,21 @@ function loadNotas(aluno){
         if(nome === undefined){
             continue;
         }
+        var div = document.createElement('div');
+        div.classList.add('nota')
 
-        var node = document.createElement('h3');
+        var node = document.createElement('b');
         node.classList.add('titulo')
         node.innerHTML =nome;
-        raiz.appendChild(node);
-        
+        div.appendChild(node);
         var node = document.createElement('div');
         node.innerHTML =`nota: ${nota} de 100 pontos`;
-        raiz.appendChild(node);
+        div.appendChild(node);
         var node = document.createElement('div');
         node.innerHTML =`peso: ${peso} %`;
-        raiz.appendChild(node);
+        div.appendChild(node);
+
+        raiz.appendChild(div);
     }
 
 }
