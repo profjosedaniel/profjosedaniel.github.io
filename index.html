@@ -50,9 +50,9 @@ function buscar(){
     hashmatricula = CryptoJS.MD5(matricula).toString();
     console.log(hashmatricula);
     json= ""+httpGet("json/"+hashmatricula+'.json');
-    console.log(json);
+    
     jsondecode= CryptoJS.AES.decrypt(json,matricula).toString( CryptoJS.enc.Utf8 );
-    console.log("-------------------------");
+    console.log(json);
     console.log(jsondecode);
     
     jsondecode=JSON.parse(jsondecode)
