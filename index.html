@@ -69,6 +69,7 @@ function loadNotas(aluno){
     for (var [key, value] of Object.entries(aluno)) {
         
         console.log(key + ' ' + value);  
+        var id=value['id'];
         var nome=value['nome'];
         var peso=value['peso'];
         var nota=value['nota'];
@@ -83,7 +84,7 @@ function loadNotas(aluno){
 
         var node = document.createElement('b');
         node.classList.add('titulo')
-        node.innerHTML =nome;
+        node.innerHTML =nome+" - "+id;
         div.appendChild(node);
 
         var node = document.createElement('div');
