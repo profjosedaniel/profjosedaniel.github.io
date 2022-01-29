@@ -74,6 +74,7 @@ function loadNotas(aluno){
         var peso=value['peso'];
         var nota=value['nota'];
         var etapa=value['etapa'];
+        var observacao=value['observacao'];
         var feedback=value['feedback'];
         
         if(nome === undefined){
@@ -100,6 +101,9 @@ function loadNotas(aluno){
         div.appendChild(node);
 
         raiz.appendChild(div);
+
+
+
     }
 
 }
@@ -109,9 +113,13 @@ function load(aluno){
         raiz.firstChild.remove()
     }
     for (var [key, value] of Object.entries(aluno) ){
+        var nomeDisciplina=value['nome'];
+        var observacao=value['observacao'];
         var node = document.createElement('h1');
-        node.innerHTML =value['nome']+"-"+key;
+        node.innerHTML =nomeDisciplina+"-"+key;
         raiz.appendChild(node);
+
+
 
         for (var k in value['notas']){
             var n=value['notas'][k];
@@ -123,6 +131,18 @@ function load(aluno){
             raiz.appendChild(nodez);
         }
 
+
+        var nodez = document.createElement('div');
+        nodez.classList.add('nota')
+        var nodeTituloObservavao = document.createElement('h3');
+        nodeTituloObservavao.innerHTML = 'Observação:';
+        nodez.appendChild(nodeTituloObservavao);
+        var nodeDescricaoObservavao = document.createElement('p');
+        nodeDescricaoObservavao.innerHTML = `${observacao}`;
+        nodez.appendChild(nodeDescricaoObservavao);
+        
+        
+        raiz.appendChild(nodez);
 
         loadNotas(value);
     }
