@@ -50,7 +50,7 @@ var json="";
 var matricula="";
 var hashmatricula;
 function buscar(){
-    matricula = document.getElementById("matricula").value;
+    matricula = document.getElementById("matricula").value.toUpperCase();
     hashmatricula = CryptoJS.MD5(matricula).toString();
     console.log(hashmatricula);
     json= ""+httpGet("json/"+hashmatricula+'.json');
