@@ -80,6 +80,46 @@ function buscar(){
     jsondecode=JSON.parse(jsondecode)
     load(jsondecode);
 }
+function emotionNota(nota){
+    var status=''     
+    if(nota!=undefined && nota=='?'){
+        status='❓'     
+    }else if(nota!=undefined && parseInt(nota)==100 ){
+        status='✅ &#x1F49A;'
+    }else if(nota!=undefined && parseInt(nota)>=70 ){
+        status='✅'
+    }else if(nota!=undefined && parseInt(nota)>0 ){
+            status='❗'
+    }else if(nota!=undefined && parseInt(nota)==0 ){
+        status='❌'
+    }
+    return status;
+}
+
+function emotionNotaEtapa(nota){
+    var status='❓'     
+    if(nota!=undefined && parseInt(nota)==10 ){
+        status='✅ &#x1F49A;'
+    }else if(nota!=undefined && parseInt(nota)>=7 ){
+        status='✅'
+    }else if(nota!=undefined && parseInt(nota)>0 ){
+        status='❗'
+    }else if(nota!=undefined && parseInt(nota)==0 ){
+        status='❌'
+    }
+    return status;
+}
+
+
+function checkDate(data1){
+    const d = new Date();
+    var year=d.getFullYear();
+    var month=d.getMonth()
+    var day=d.getDate()
+    var data2=year+"-"+month+"-"+day
+
+    return data2>data1
+}
 
 function loadNotas(aluno,disciplina){
    
@@ -87,8 +127,17 @@ function loadNotas(aluno,disciplina){
     div_notas.classList.add('"panel-group');
     div_notas.setAttribute("id",'notas'+disciplina);
 
-    
-    for (var [key, value] of Object.entries(aluno)) {
+    var items = Object.keys(aluno).map(function(key) {
+        return aluno[key];
+    });
+    // Sort the array based on the second element
+    items.sort(function(first, second) {
+        return (first.etapa*1000+first.numero) -  (second.etapa*1000+second.numero) ;
+    });
+
+   // for (var [key, value] of Object.entries(aluno)) {
+    for (var key in items) {
+        var value=items[key]
         var div_nota=document.createElement('div');
         div_nota.classList.add('panel');
         div_nota.classList.add('panel-default');
@@ -105,6 +154,8 @@ function loadNotas(aluno,disciplina){
 
         console.log(key + ' ' + value);  
         var id=value['id'];
+        
+        var prazo=value['prazo'];
         var nome=value['nome'];
         var peso=value['peso'];
         var nota=value['nota'];
@@ -117,28 +168,19 @@ function loadNotas(aluno,disciplina){
 
         if(nome === undefined || nome.length<3){
             continue;
+        } 
+        if(nota=='?' && checkDate(prazo)){
+            nota=0
         }
-       // var div = document.createElement('div');
-        //div.classList.add('nota')
-
+        
         var node = document.createElement('a');
-//        node.classList.add('accordion-button')
         node.setAttribute('data-toggle',"collapse")
         node.setAttribute('data-parent',"#notas"+disciplina)
         node.setAttribute('href',"#corpo"+id)
 
-        var status='&#10060;'  
-        
-        
-        if(nota!=undefined && parseInt(nota)==100 ){
-            status='&#x1F49A;'
-        }else if(nota!=undefined && parseInt(nota)>0 ){
-            status='&#x2714;'
-        }else if(nota!=undefined && parseInt(nota)==0 ){
-            status='&#10067;'
-        }
+        var status=emotionNota(nota);
 
-        node.innerHTML =nome+" "+status+"";
+        node.innerHTML =nome+" (Etapa "+etapa+") "+status+"";
         div_head.appendChild(node);
 
         var node = document.createElement('div');
@@ -156,6 +198,11 @@ function loadNotas(aluno,disciplina){
         
         var node = document.createElement('div');
         node.innerHTML =`Id: <b>${id}</b>`;
+        div_corpo.appendChild(node);
+
+        
+        var node = document.createElement('div');
+        node.innerHTML =`Prazo: <b>${prazo}</b>`;
         div_corpo.appendChild(node);
 
 
@@ -179,7 +226,7 @@ function loadNotas(aluno,disciplina){
         
         
     }
- //   $('.collapse').collapse()
+
     var raiz = document.getElementById("notas");
     raiz.appendChild(div_notas);
 
@@ -207,12 +254,14 @@ function load(aluno){
         nodebody.appendChild(node);
  
         for (var k in value['notas']){
-            var n=value['notas'][k];
-            if(n === null){
-                n='';
-            }
+            var nota=value['notas'][k];
+            var status=emotionNotaEtapa(nota)
+            if(nota === null){
+                nota='';
+            } 
+
             var nodez = document.createElement('div');
-            nodez.innerHTML = `<b>${k}</b> : ${n}`;
+            nodez.innerHTML = `<b>${k}</b> : ${nota}   ${status}`;
             nodebody.appendChild(nodez);
         }
         nodeCard.appendChild(nodebody)
@@ -257,13 +306,11 @@ function httpGet(theUrl)
     }
 }
 
+
 //var json= JSON.parse(httpGet('20181INFI_PINHE0020.json'));
 //console.log(json);
 //load(json);
 </script>
-
-
-
 
   
 </body>
