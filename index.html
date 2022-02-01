@@ -14,6 +14,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/aes.min.js" integrity="sha512-4b1zfeOuJCy8B/suCMGNcEkMcQkQ+/jQ6HlJIaYVGvg2ZydPvdp7GY0CuRVbNpSxNVFqwTAmls2ftKSkDI9vtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/hmac-sha256.min.js" integrity="sha512-HMqYytekgCbPoNWBm9oazvuOJ8sFpw+FWBHRi2QM0f/bV5djDV1sRzWzu5Jq7MAUlm+zDAUCgi/vHBBlUGLroQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    
     <title>Notas</title>
     <style>
     .titulo{
@@ -28,19 +33,32 @@
 <body>
 
 <div>
-<form class="row g-3">
+<form class="container">
 <div class="col-auto">
-    <label class="visually-hidden">Matricula</label>
-    <input class="form-control"  id="matricula" value="" placeholder="matricula"/>
+
+    <div class="mb-3">    
+        <label for='matricula'>Informe sua matrícula</label>
+        <input class="form-control"  id="matricula" value="" placeholder="matricula"/>
+    </div>
+
+    
+    <div class="col-auto">
+        <input class="btn btn-primary mb-3" type='button' value="Buscar" onclick="buscar(this)"/>
+    </div>
+
 </div>
-<div class="col-auto">
-<input class="btn btn-primary mb-3" type='button' value="Buscar" onclick="buscar(this)"/>
-</div>
+
+    <div class="mb-3">
+        <div id="erromatricula" style="display:none" class="alert alert-danger" role="alert">
+            A matrícula informada não foi localizada.
+        </div>
+    </div>
+
 </form>
 
 </div>
 
-<div id="notas">
+<div id="notas" class="container">
 </div>
 
 <script>
@@ -63,11 +81,28 @@ function buscar(){
     load(jsondecode);
 }
 
-function loadNotas(aluno){
-    var raiz = document.getElementById("notas");
+function loadNotas(aluno,disciplina){
+   
+    var div_notas=document.createElement('div');
+    div_notas.classList.add('"panel-group');
+    div_notas.setAttribute("id",'notas'+disciplina);
+
     
     for (var [key, value] of Object.entries(aluno)) {
+        var div_nota=document.createElement('div');
+        div_nota.classList.add('panel');
+        div_nota.classList.add('panel-default');
         
+
+        var div_head=document.createElement('div');
+        div_head.classList.add('panel-heading');
+        
+
+        var div_corpo=document.createElement('div');
+        div_corpo.classList.add('panel-collapse');
+        div_corpo.classList.add('collapse');
+        
+
         console.log(key + ' ' + value);  
         var id=value['id'];
         var nome=value['nome'];
@@ -76,35 +111,78 @@ function loadNotas(aluno){
         var etapa=value['etapa'];
         var observacao=value['observacao'];
         var feedback=value['feedback'];
-        
-        if(nome === undefined){
+        if(feedback==undefined){
+            feedback='-';
+        }
+
+        if(nome === undefined || nome.length<3){
             continue;
         }
-        var div = document.createElement('div');
-        div.classList.add('nota')
+       // var div = document.createElement('div');
+        //div.classList.add('nota')
 
-        var node = document.createElement('b');
-        node.classList.add('titulo')
-        node.innerHTML =nome+" - "+id;
-        div.appendChild(node);
+        var node = document.createElement('a');
+//        node.classList.add('accordion-button')
+        node.setAttribute('data-toggle',"collapse")
+        node.setAttribute('data-parent',"#notas"+disciplina)
+        node.setAttribute('href',"#corpo"+id)
+
+        var status='&#10060;'  
+        
+        
+        if(nota!=undefined && parseInt(nota)==100 ){
+            status='&#x1F49A;'
+        }else if(nota!=undefined && parseInt(nota)>0 ){
+            status='&#x2714;'
+        }else if(nota!=undefined && parseInt(nota)==0 ){
+            status='&#10067;'
+        }
+
+        node.innerHTML =nome+" "+status+"";
+        div_head.appendChild(node);
 
         var node = document.createElement('div');
         node.innerHTML =`Etapa: ${etapa}`;
-        div.appendChild(node);
+        div_corpo.appendChild(node);
 
         var node = document.createElement('div');
         node.innerHTML =`peso: ${peso} %`;
-        div.appendChild(node);
+        div_corpo.appendChild(node);
 
         var node = document.createElement('div');
         node.innerHTML =`nota: <b>${nota}</b> de 100 pontos`;
-        div.appendChild(node);
+        div_corpo.appendChild(node);
 
-        raiz.appendChild(div);
+        
+        var node = document.createElement('div');
+        node.innerHTML =`Id: <b>${id}</b>`;
+        div_corpo.appendChild(node);
 
 
+        var node = document.createElement('div');
+        node.innerHTML =`Feedback: <b>${feedback}</b>`;
+        div_corpo.appendChild(node);
 
+        
+        div_head.setAttribute('id','head'+id)
+
+        div_corpo.setAttribute('id','corpo'+id)
+        div_corpo.setAttribute( "aria-labelledby","head"+id)
+        div_corpo.setAttribute( 'data-bs-parent',"#notas"+disciplina)
+
+        
+
+        div_nota.appendChild(div_head)
+        div_nota.appendChild(div_corpo)
+        div_notas.appendChild(div_nota)
+
+        
+        
     }
+ //   $('.collapse').collapse()
+    var raiz = document.getElementById("notas");
+    raiz.appendChild(div_notas);
+
 
 }
 function load(aluno){
@@ -112,15 +190,22 @@ function load(aluno){
     while (raiz.firstChild) {
         raiz.firstChild.remove()
     }
+
     for (var [key, value] of Object.entries(aluno) ){
+        var nodeCard = document.createElement('div');
+        nodeCard.classList.add('card')
+        //nodeCard.style="width: 18rem;"
+        var nodebody = document.createElement('div');
+        nodebody.classList.add('card-body')
+
         var nomeDisciplina=value['nome'];
         var observacao=value['observacao'];
+
         var node = document.createElement('h1');
+        node.classList.add('card-title')
         node.innerHTML =nomeDisciplina+"-"+key;
-        raiz.appendChild(node);
-
-
-
+        nodebody.appendChild(node);
+ 
         for (var k in value['notas']){
             var n=value['notas'][k];
             if(n === null){
@@ -128,23 +213,28 @@ function load(aluno){
             }
             var nodez = document.createElement('div');
             nodez.innerHTML = `<b>${k}</b> : ${n}`;
-            raiz.appendChild(nodez);
+            nodebody.appendChild(nodez);
         }
-
-
+        nodeCard.appendChild(nodebody)
+        raiz.appendChild(nodeCard)
+//////////////////////////////////////
         var nodez = document.createElement('div');
-        nodez.classList.add('nota')
+        nodez.classList.add('alert')
+        nodez.classList.add('alert-success')
+        
         var nodeTituloObservavao = document.createElement('h3');
         nodeTituloObservavao.innerHTML = 'Observação:';
         nodez.appendChild(nodeTituloObservavao);
+
         var nodeDescricaoObservavao = document.createElement('p');
         nodeDescricaoObservavao.innerHTML = `${observacao}`;
         nodez.appendChild(nodeDescricaoObservavao);
         
         
         raiz.appendChild(nodez);
+////////////////////////////////////////////
 
-        loadNotas(value);
+        loadNotas(value,key);
     }
 }   
 
@@ -154,13 +244,17 @@ function httpGet(theUrl)
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
  
- 
+    document.getElementById("notas").innerHTML=''
     xmlHttp.send( null );
     if (xmlHttp.status == 404){
-        alert("Não foi possivel localizar");
+        document.getElementById("erromatricula").style.display='block'
+    
         return "";
-    }else
+    }else{
+        
+        document.getElementById("erromatricula").style.display='none'
         return xmlHttp.responseText;
+    }
 }
 
 //var json= JSON.parse(httpGet('20181INFI_PINHE0020.json'));
@@ -169,6 +263,10 @@ function httpGet(theUrl)
 </script>
 
 
+
+
+  
 </body>
+
 
 </html>
