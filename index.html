@@ -62,11 +62,16 @@
 </div>
 
 <script>
-
+$(function() {
+	var matricula=getID()
+    $("#matricula").val(matricula)
+	buscar()
+});
 
 var json="";
 var matricula="";
 var hashmatricula;
+
 function buscar(){
     matricula = document.getElementById("matricula").value.toUpperCase();
     hashmatricula = CryptoJS.MD5(matricula).toString();
@@ -119,6 +124,14 @@ function checkDate(data1){
     var data2=year+"-"+month+"-"+day
 
     return data2>data1
+}
+
+function getID(){
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const id= urlParams.get('id')
+	console.log(id);
+	return id;
 }
 
 function loadNotas(aluno,disciplina){
@@ -232,6 +245,7 @@ function loadNotas(aluno,disciplina){
 
 
 }
+
 function load(aluno){
     var raiz = document.getElementById("notas");
     while (raiz.firstChild) {
@@ -286,6 +300,8 @@ function load(aluno){
         loadNotas(value,key);
     }
 }   
+
+
 
 
 function httpGet(theUrl)
