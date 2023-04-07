@@ -172,6 +172,7 @@ function loadNotas(aluno,disciplina){
         var nome=value['nome'];
         var peso=value['peso'];
         var nota=value['nota'];
+        var enunciado=value['enunciado'];
         var etapa=value['etapa'];
         var observacao=value['observacao'];
         var feedback=value['feedback'];
@@ -197,30 +198,34 @@ function loadNotas(aluno,disciplina){
         div_head.appendChild(node);
 
         var node = document.createElement('div');
-        node.innerHTML =`Etapa: ${etapa}`;
+        node.innerHTML =`<b>Etapa:</b> ${etapa}`;
         div_corpo.appendChild(node);
 
         var node = document.createElement('div');
-        node.innerHTML =`peso: ${peso} %`;
+        node.innerHTML =`<b>Enunciado:</b> ${enunciado}`;
         div_corpo.appendChild(node);
 
         var node = document.createElement('div');
-        node.innerHTML =`nota: <b>${nota}</b> de 100 pontos`;
+        node.innerHTML =`<b>Peso:</b> ${peso} %`;
+        div_corpo.appendChild(node);
+
+        var node = document.createElement('div');
+        node.innerHTML =`<b>Nota:</b> <b>${nota}</b> de 100 pontos`;
         div_corpo.appendChild(node);
 
         
         var node = document.createElement('div');
-        node.innerHTML =`Id: <b>${id}</b>`;
+        node.innerHTML =`<b>Id:</b> ${id}`;
         div_corpo.appendChild(node);
 
         
         var node = document.createElement('div');
-        node.innerHTML =`Prazo: <b>${prazo}</b>`;
+        node.innerHTML =`<b>Prazo:</b> ${prazo}`;
         div_corpo.appendChild(node);
 
 
         var node = document.createElement('div');
-        node.innerHTML =`Feedback: <b>${feedback}</b>`;
+        node.innerHTML =`<b>Feedback:</b> ${feedback}`;
         div_corpo.appendChild(node);
 
         
