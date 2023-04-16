@@ -7,3 +7,5 @@ git commit -m "asd"
 git push -u origin main
 
 Get-Date -UFormat %s > .\data.txt
+
+exit
