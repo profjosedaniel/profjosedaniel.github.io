@@ -1,2 +1,0 @@
-PowerShell < enviar.bat
-exit
