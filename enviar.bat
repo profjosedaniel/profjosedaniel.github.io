@@ -1,3 +1,5 @@
+curl http://localhost:8000/export/notas/2023
+
 cd "C:\Users\Daniel\OneDrive - acad.ifma.edu.br\codigos\profjosedaniel\site\"
 
 date /t > .\run_script.txt
