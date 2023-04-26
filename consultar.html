@@ -135,23 +135,21 @@ function getID(){
 	return id;
 }
 
-function loadNotas(aluno,disciplina){
+function loadNotas(items,disciplina,etapa,nota){
    
     var div_notas=document.createElement('div');
     div_notas.classList.add('"panel-group');
-    div_notas.setAttribute("id",'notas'+disciplina);
+    div_notas.setAttribute("id",'notas'+disciplina,etapa);
 
-    var items = Object.keys(aluno).map(function(key) {
-        return aluno[key];
-    });
-    // Sort the array based on the second element
-    items.sort(function(first, second) {
-        return (first.etapa*1000+first.numero) -  (second.etapa*1000+second.numero) ;
-    });
+    var nodeTitulo = document.createElement('h3');
+    nodeTitulo.innerHTML = 'Etapa:'+etapa+" "+nota;
+    div_notas.appendChild(nodeTitulo);
+
 
    // for (var [key, value] of Object.entries(aluno)) {
     for (var key in items) {
         var value=items[key]
+   
         var div_nota=document.createElement('div');
         div_nota.classList.add('panel');
         div_nota.classList.add('panel-default');
@@ -169,6 +167,7 @@ function loadNotas(aluno,disciplina){
         console.log(key + ' ' + value);  
         var id=value['id'];
         
+
         var prazo=value['prazo'];
         var nome=value['nome'];
         var peso=value['peso'];
@@ -176,7 +175,7 @@ function loadNotas(aluno,disciplina){
         var enunciado=value['enunciado'];
         var etapa=value['etapa'];
         var observacao=value['observacao'];
-        var feedback=value['feedback'];
+        var feedback=value['feedback'] || '';
         var calcNota= '0';
         if(nota>0) {
             calcNota= parseFloat((nota/100)*(peso/10)).toFixed(1);
@@ -246,11 +245,10 @@ function loadNotas(aluno,disciplina){
         div_nota.appendChild(div_head)
         div_nota.appendChild(div_corpo)
         div_notas.appendChild(div_nota)
-
-        
         
     }
 
+    
     var raiz = document.getElementById("notas");
     raiz.appendChild(div_notas);
 
@@ -272,11 +270,19 @@ function load(aluno){
 
         var nomeDisciplina=value['nome'];
         var observacao=value['observacao'];
+        var frequenciaDisciplina=value['frequencia']||'';
 
         var node = document.createElement('h1');
         node.classList.add('card-title')
         node.innerHTML =nomeDisciplina+"-"+key;
         nodebody.appendChild(node);
+
+
+        var node = document.createElement('div');
+        node.classList.add('card-title')
+        node.innerHTML ="<b>Frequencia:</b> "+frequenciaDisciplina;
+        nodebody.appendChild(node);
+
  
         for (var k in value['notas']){
             var nota=value['notas'][k];
@@ -308,7 +314,29 @@ function load(aluno){
         raiz.appendChild(nodez);
 ////////////////////////////////////////////
 
-        loadNotas(value,key);
+
+
+        for(let etapa =1 ;etapa<=5;etapa++){
+            var items = Object.keys(value).map(function(key) {
+                return value[key];
+            });
+            items.sort(function(first, second) {
+                return (first.etapa*1000+first.numero) -  (second.etapa*1000+second.numero) ;
+            }); 
+    
+            let notasEtapa= items.filter((item) => item['etapa'] ==etapa) 
+
+            
+            if(notasEtapa.length>0){
+                let mediaEtapa=value['notas'][''+etapa]
+                if(mediaEtapa == undefined){
+                    mediaEtapa=""
+                }
+                loadNotas(notasEtapa,key,etapa,mediaEtapa);
+            }
+                
+        }
+
     }
 }   
 
