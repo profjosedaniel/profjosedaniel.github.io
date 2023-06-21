@@ -87,7 +87,7 @@ function buscar(){
 }
 
 function emotionNota(nota){
-    var status=''     
+    var status='--'     
     if(nota!=undefined && nota=='?'){
         status='❓'     
     }else if(nota!=undefined && parseInt(nota)==100 ){
@@ -199,7 +199,7 @@ function loadNotas(items,disciplina,etapa,nota){
 
         var status=emotionNota(nota);
 
-        node.innerHTML =nome+" (Etapa "+etapa+") "+status+` ${calcNota} ponto(s) `;
+        node.innerHTML =nome+" (Etapa "+etapa+") "+status+` Obteve ${calcNota} ponto(s) de  ${peso/10} ponto(s) `;
         div_head.appendChild(node);
 
         var node = document.createElement('div');
