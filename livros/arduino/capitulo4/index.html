@@ -1,0 +1,1231 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Introdução à plataforma Arduino">
+      
+      
+        <meta name="author" content="Jose Daniel Pereira">
+      
+      
+      
+        <link rel="prev" href="../capitulo3/">
+      
+      
+        <link rel="next" href="../projetos/">
+      
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Capítulo 4 - Livro Arduino</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#programando-com-arduino-primeiros-passos-e-exemplos-praticos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Livro Arduino" class="md-header__button md-logo" aria-label="Livro Arduino" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M221.5 51.7C216.6 39.8 204.9 32 192 32s-24.6 7.8-29.5 19.7l-120 288-40 96c-6.8 16.3.9 35 17.2 41.8s35-.9 41.8-17.2L93.3 384h197.3l31.8 76.3c6.8 16.3 25.5 24 41.8 17.2s24-25.5 17.2-41.8l-40-96-120-288zM264 320H120l72-172.8z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Livro Arduino
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Capítulo 4
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Livro Arduino" class="md-nav__button md-logo" aria-label="Livro Arduino" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M221.5 51.7C216.6 39.8 204.9 32 192 32s-24.6 7.8-29.5 19.7l-120 288-40 96c-6.8 16.3.9 35 17.2 41.8s35-.9 41.8-17.2L93.3 384h197.3l31.8 76.3c6.8 16.3 25.5 24 41.8 17.2s24-25.5 17.2-41.8l-40-96-120-288zM264 320H120l72-172.8z"/></svg>
+
+    </a>
+    Livro Arduino
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capitulo1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capítulo 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capitulo2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capítulo 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capitulo3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capítulo 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Capítulo 4
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capítulo 4
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-introducao-a-programacao-arduino" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Introdução à Programação Arduino
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-estrutura-basica-de-um-sketch" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2. Estrutura Básica de um Sketch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-constantes-e-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Constantes e Variáveis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-primeiros-passos-blink-piscando-um-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3. Primeiros Passos: Blink (Piscando um LED)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-lendo-entradas-digitais-botao" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4. Lendo Entradas Digitais: Botão
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-lendo-entradas-analogicas-potenciometro" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5. Lendo Entradas Analógicas: Potenciômetro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-comunicacao-serial-enviando-dados-para-o-computador" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6. Comunicação Serial: Enviando Dados para o Computador
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-logica-e-aritmetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.7. Lógica e Aritmética
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.7. Lógica e Aritmética">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operacoes-aritmeticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operações Aritméticas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simbolos-compostos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Símbolos Compostos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-comparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores de Comparação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-logicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Lógicos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projetos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-introducao-a-programacao-arduino" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Introdução à Programação Arduino
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-estrutura-basica-de-um-sketch" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2. Estrutura Básica de um Sketch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-constantes-e-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Constantes e Variáveis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-primeiros-passos-blink-piscando-um-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3. Primeiros Passos: Blink (Piscando um LED)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-lendo-entradas-digitais-botao" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4. Lendo Entradas Digitais: Botão
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-lendo-entradas-analogicas-potenciometro" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5. Lendo Entradas Analógicas: Potenciômetro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-comunicacao-serial-enviando-dados-para-o-computador" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6. Comunicação Serial: Enviando Dados para o Computador
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-logica-e-aritmetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.7. Lógica e Aritmética
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.7. Lógica e Aritmética">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operacoes-aritmeticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operações Aritméticas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simbolos-compostos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Símbolos Compostos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-comparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores de Comparação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-logicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Lógicos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="programando-com-arduino-primeiros-passos-e-exemplos-praticos">Programando com Arduino: Primeiros Passos e Exemplos Práticos</h1>
+<h2 id="41-introducao-a-programacao-arduino">4.1. Introdução à Programação Arduino</h2>
+<p>A programação do Arduino é realizada utilizando uma linguagem baseada em C/C++, simplificada para facilitar o aprendizado e a utilização por iniciantes. O ambiente de desenvolvimento (IDE) fornece uma estrutura básica para os programas, chamados de "sketches". Um sketch Arduino possui duas funções principais: <code>setup()</code> e <code>loop()</code>.</p>
+<ul>
+<li><code>setup()</code>: Esta função é executada apenas uma vez, quando o Arduino é ligado ou resetado. É utilizada para inicializar configurações, como definir o modo dos pinos (entrada ou saída), iniciar a comunicação serial, etc.</li>
+<li><code>loop()</code>: Esta função é executada continuamente em um ciclo infinito, após a função <code>setup()</code> ser concluída. É onde a lógica principal do programa é implementada: ler dados de sensores, tomar decisões e controlar atuadores.</li>
+</ul>
+<h2 id="42-estrutura-basica-de-um-sketch">4.2. Estrutura Básica de um Sketch</h2>
+<p>Todo sketch Arduino segue uma estrutura básica:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="c1">// Inicialização das configurações</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="c1">// Lógica principal do programa</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="43-constantes-e-variaveis">4.3 Constantes e Variáveis</h2>
+<p>Constantes e variáveis são elementos fundamentais na programação Arduino, permitindo que você armazene e manipule dados dentro de seus sketches.</p>
+<p><strong>Constantes:</strong> São valores predefinidos que não podem ser alterados durante a execução do programa. Elas representam valores fixos e imutáveis. No Arduino, existem três grupos principais de constantes:</p>
+<ul>
+<li><strong><code>TRUE</code> / <code>FALSE</code>:</strong> Constantes booleanas que definem estados lógicos. <code>TRUE</code> é representado por qualquer valor diferente de zero (geralmente 1), e <code>FALSE</code> é representado por zero (0). São utilizadas em expressões condicionais e lógicas.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">bool</span><span class="w"> </span><span class="n">ledLigado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"> </span><span class="c1">// Declara uma variável booleana e atribui o valor TRUE</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ledLigado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"> </span><span class="c1">// Liga o LED se a variável for TRUE</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
+</span></code></pre></div></li>
+<li><strong><code>HIGH</code> / <code>LOW</code>:</strong> Definem os níveis de tensão nos pinos digitais. <code>HIGH</code> geralmente representa 5V (ou 3.3V em algumas placas), e <code>LOW</code> representa 0V (GND). São utilizados para definir o estado de um pino digital como ligado ou desligado.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"> </span><span class="c1">// Define o pino do LED como HIGH (5V), ligando o LED</span>
+</span></code></pre></div></li>
+<li><strong><code>INPUT</code> / <code>OUTPUT</code>:</strong> Definem se um pino digital será configurado como uma entrada (para ler dados de um sensor, por exemplo) ou como uma saída (para controlar um LED, por exemplo). São utilizados na função <code>pinMode()</code>.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">pinMode</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w">   </span><span class="c1">// Define o pino do LED como uma saída</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">pinMode</span><span class="p">(</span><span class="n">buttonPin</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span><span class="w"> </span><span class="c1">// Define o pino do botão como uma entrada</span>
+</span></code></pre></div></li>
+</ul>
+<p><strong>Variáveis:</strong> São posições nomeadas na memória do Arduino, utilizadas para armazenar informações que podem ser alteradas durante a execução do programa. Cada variável possui um nome (um identificador) e um tipo (que define o tipo de dado que pode ser armazenado na variável).</p>
+<p><strong>Escopo:</strong> O escopo de uma variável define onde ela pode ser acessada e utilizada dentro do código.</p>
+<ul>
+<li><strong>Variáveis globais:</strong> São declaradas fora de qualquer função (geralmente no início do sketch) e podem ser acessadas e modificadas por qualquer função no programa.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">ledPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span><span class="w"> </span><span class="c1">// Variável global: pode ser usada em setup() e loop()</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
+</span></code></pre></div></li>
+<li><strong>Variáveis locais:</strong> São declaradas dentro de uma função e só podem ser acessadas e modificadas dentro dessa função.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">sensorValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="n">A0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Variável local: só pode ser usada dentro de loop()</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="c1">// ...</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</span></code></pre></div></li>
+</ul>
+<p><strong>Declaração:</strong> Antes de usar uma variável, é necessário declará-la, especificando seu tipo e seu nome. A sintaxe geral para declarar uma variável é:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">tipo</span><span class="w"> </span><span class="n">nomeDaVariavel</span><span class="p">;</span>
+</span></code></pre></div>
+<p><strong>Tipos de Variáveis:</strong> O Arduino suporta diversos tipos de variáveis, cada um adequado para armazenar diferentes tipos de dados. Alguns dos tipos mais comuns são:</p>
+<ul>
+<li><strong><code>byte</code>:</strong> Armazena um valor inteiro de 8 bits, variando de 0 a 255. Útil para armazenar pequenos valores inteiros ou dados binários.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">byte</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">;</span><span class="w"> </span><span class="c1">// Armazena o valor 120 em um byte</span>
+</span></code></pre></div></li>
+<li><strong><code>int</code>:</strong> Armazena um valor inteiro de 16 bits. A faixa de valores depende da placa Arduino utilizada:<ul>
+<li>Arduino Uno: -32,768 a 32,767</li>
+<li>Arduino Due: -2,147,483,648 a 2,147,483,647
+Útil para armazenar valores inteiros dentro dessa faixa.
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="w"> </span><span class="c1">// Armazena a temperatura em graus Celsius</span>
+</span></code></pre></div></li>
+</ul>
+</li>
+<li><strong><code>long</code>:</strong> Armazena um valor inteiro de 32 bits, variando de -2,147,483,648 a 2,147,483,647. Útil para armazenar valores inteiros grandes.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">long</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">150000</span><span class="p">;</span><span class="w"> </span><span class="c1">// Armazena a distância em milímetros</span>
+</span></code></pre></div></li>
+<li><strong><code>float</code>:</strong> Armazena um número de ponto flutuante (número com casas decimais) de 32 bits. Útil para armazenar valores com precisão decimal.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159</span><span class="p">;</span><span class="w"> </span><span class="c1">// Armazena o valor de pi</span>
+</span></code></pre></div></li>
+<li><strong><code>boolean</code>:</strong> Armazena um valor booleano, que pode ser <code>TRUE</code> ou <code>FALSE</code>. Útil para representar estados lógicos.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">boolean</span><span class="w"> </span><span class="n">buttonPressed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="c1">// Armazena o estado do botão (pressionado ou não)</span>
+</span></code></pre></div></li>
+<li><strong><code>char</code>:</strong> Armazena um único caractere (letra, número, símbolo) de 8 bits, de acordo com a tabela ASCII.
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">char</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Armazena a inicial do nome</span>
+</span></code></pre></div></li>
+</ul>
+<p>Escolher o tipo de variável correto é importante para otimizar o uso da memória do Arduino e garantir que os dados sejam armazenados com precisão.</p>
+<h2 id="43-primeiros-passos-blink-piscando-um-led">4.3. Primeiros Passos: Blink (Piscando um LED)</h2>
+<p>Um dos primeiros exemplos que todo iniciante em Arduino experimenta é o "Blink", que consiste em fazer um LED piscar. Para isso, siga os passos:</p>
+<ol>
+<li><strong>Conecte um LED ao pino digital 13</strong> do Arduino, utilizando um resistor de 220 ohms em série para limitar a corrente e proteger o LED. O pino 13 já possui um resistor embutido na placa, mas é uma boa prática usar um resistor externo.</li>
+<li><strong>Abra o IDE Arduino</strong> e crie um novo sketch.</li>
+<li><strong>Copie e cole o seguinte código:</strong></li>
+</ol>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// Define o pino do LED</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">ledPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="c1">// Define o pino do LED como saída</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="c1">// Liga o LED</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span><span class="c1">// Espera 1 segundo</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">  </span><span class="c1">// Desliga o LED</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">  </span><span class="c1">// Espera 1 segundo</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Explicação do código:</strong><ul>
+<li><code>int ledPin = 13;</code>: Define uma variável inteira chamada <code>ledPin</code> e atribui o valor 13 a ela. Essa variável representa o número do pino digital ao qual o LED está conectado.</li>
+<li><code>pinMode(ledPin, OUTPUT);</code>: Configura o pino definido na variável <code>ledPin</code> como uma saída. Isso significa que o Arduino pode enviar sinais elétricos através desse pino para controlar o LED.</li>
+<li><code>digitalWrite(ledPin, HIGH);</code>: Envia um sinal HIGH (5V) para o pino do LED, ligando-o.</li>
+<li><code>delay(1000);</code>: Pausa a execução do programa por 1000 milissegundos (1 segundo).</li>
+<li><code>digitalWrite(ledPin, LOW);</code>: Envia um sinal LOW (0V) para o pino do LED, desligando-o.</li>
+</ul>
+</li>
+<li><strong>Conecte o Arduino ao computador</strong> através do cabo USB.</li>
+<li><strong>Selecione a placa Arduino correta</strong> no menu "Ferramentas &gt; Placa".</li>
+<li><strong>Selecione a porta serial correta</strong> no menu "Ferramentas &gt; Porta".</li>
+<li><strong>Clique no botão "Carregar"</strong> (seta para a direita) para enviar o código para o Arduino.</li>
+</ol>
+<p>Após o upload, o LED conectado ao pino 13 deverá começar a piscar a cada segundo.</p>
+<h2 id="44-lendo-entradas-digitais-botao">4.4. Lendo Entradas Digitais: Botão</h2>
+<p>Este exemplo demonstra como ler o estado de um botão conectado ao Arduino.</p>
+<ol>
+<li><strong>Conecte um botão ao pino digital 2</strong> do Arduino. Utilize um resistor de 10k ohms como pull-down, conectando-o entre o pino do botão e o GND. Conecte o outro terminal do botão ao 5V.</li>
+<li><strong>Copie e cole o seguinte código:</strong></li>
+</ol>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">// Define o pino do botão</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">buttonPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">// Define o pino do LED</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="kt">int</span><span class="w"> </span><span class="n">ledPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span><span class="c1">// Define o pino do botão como entrada</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">buttonPin</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">  </span><span class="c1">// Define o pino do LED como saída</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">}</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">  </span><span class="c1">// Lê o estado do botão</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">digitalRead</span><span class="p">(</span><span class="n">buttonPin</span><span class="p">);</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">  </span><span class="c1">// Se o botão estiver pressionado</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">buttonState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HIGH</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">    </span><span class="c1">// Liga o LED</span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="w">    </span><span class="c1">// Desliga o LED</span>
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Explicação do código:</strong><ul>
+<li><code>int buttonPin = 2;</code>: Define uma variável inteira chamada <code>buttonPin</code> e atribui o valor 2 a ela. Essa variável representa o número do pino digital ao qual o botão está conectado.</li>
+<li><code>int ledPin = 13;</code>: Define uma variável inteira chamada <code>ledPin</code> e atribui o valor 13 a ela. Essa variável representa o número do pino digital ao qual o LED está conectado.</li>
+<li><code>pinMode(buttonPin, INPUT);</code>: Configura o pino definido na variável <code>buttonPin</code> como uma entrada. Isso significa que o Arduino irá ler o estado elétrico desse pino.</li>
+<li><code>pinMode(ledPin, OUTPUT);</code>: Configura o pino definido na variável <code>ledPin</code> como uma saída.</li>
+<li><code>int buttonState = digitalRead(buttonPin);</code>: Lê o estado digital do pino do botão (HIGH ou LOW) e armazena o valor na variável <code>buttonState</code>.</li>
+<li><code>if (buttonState == HIGH) { ... } else { ... }</code>: Uma estrutura condicional que verifica se o botão está pressionado (HIGH). Se estiver, o LED é ligado. Caso contrário, o LED é desligado.</li>
+</ul>
+</li>
+<li><strong>Carregue o código para o Arduino.</strong></li>
+</ol>
+<p>Agora, ao pressionar o botão, o LED deverá acender. Ao soltar o botão, o LED deverá apagar.</p>
+<h2 id="45-lendo-entradas-analogicas-potenciometro">4.5. Lendo Entradas Analógicas: Potenciômetro</h2>
+<p>Este exemplo demonstra como ler um valor analógico de um potenciômetro e usar esse valor para controlar o brilho de um LED.</p>
+<ol>
+<li><strong>Conecte um potenciômetro</strong> à placa Arduino. Ligue um terminal externo do potenciômetro ao 5V, o outro terminal externo ao GND e o terminal central (o wiper) ao pino analógico A0.</li>
+<li><strong>Conecte um LED ao pino digital 9</strong> do Arduino, utilizando um resistor de 220 ohms em série. O pino 9 é um pino PWM, o que significa que ele pode gerar sinais PWM para controlar o brilho do LED.</li>
+<li><strong>Copie e cole o seguinte código:</strong></li>
+</ol>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// Define o pino do potenciômetro</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">potPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A0</span><span class="p">;</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1">// Define o pino do LED</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="kt">int</span><span class="w"> </span><span class="n">ledPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">  </span><span class="c1">// Define o pino do LED como saída</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">}</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">  </span><span class="c1">// Lê o valor do potenciômetro (0-1023)</span>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">potValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="n">potPin</span><span class="p">);</span>
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">  </span><span class="c1">// Mapeia o valor do potenciômetro para a faixa de PWM (0-255)</span>
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ledBrightness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">potValue</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1023</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">);</span>
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">  </span><span class="c1">// Define o brilho do LED</span>
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">  </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">ledBrightness</span><span class="p">);</span>
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Explicação do código:</strong><ul>
+<li><code>int potPin = A0;</code>: Define uma variável inteira chamada <code>potPin</code> e atribui o valor A0 a ela. Essa variável representa o número do pino analógico ao qual o potenciômetro está conectado.</li>
+<li><code>int ledPin = 9;</code>: Define uma variável inteira chamada <code>ledPin</code> e atribui o valor 9 a ela. Essa variável representa o número do pino PWM ao qual o LED está conectado.</li>
+<li><code>pinMode(ledPin, OUTPUT);</code>: Configura o pino definido na variável <code>ledPin</code> como uma saída.</li>
+<li><code>int potValue = analogRead(potPin);</code>: Lê o valor analógico do pino do potenciômetro (um valor entre 0 e 1023) e armazena o valor na variável <code>potValue</code>.</li>
+<li><code>int ledBrightness = map(potValue, 0, 1023, 0, 255);</code>: Mapeia o valor do potenciômetro (que varia de 0 a 1023) para a faixa de valores PWM (que varia de 0 a 255). A função <code>map()</code> realiza essa conversão linear.</li>
+<li><code>analogWrite(ledPin, ledBrightness);</code>: Envia um sinal PWM para o pino do LED, definindo o seu brilho de acordo com o valor da variável <code>ledBrightness</code>.</li>
+</ul>
+</li>
+<li><strong>Carregue o código para o Arduino.</strong></li>
+</ol>
+<p>Agora, ao girar o potenciômetro, o brilho do LED deverá variar.</p>
+<h2 id="46-comunicacao-serial-enviando-dados-para-o-computador">4.6. Comunicação Serial: Enviando Dados para o Computador</h2>
+<p>Este exemplo demonstra como enviar dados do Arduino para o computador através da comunicação serial.</p>
+<ol>
+<li><strong>Não é necessário nenhum circuito externo</strong> para este exemplo, pois a comunicação serial é feita através do cabo USB.</li>
+<li><strong>Copie e cole o seguinte código:</strong></li>
+</ol>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="c1">// Inicia a comunicação serial com uma taxa de 9600 bauds</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">}</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span><span class="c1">// Envia a mensagem &quot;Olá, mundo!&quot; para o computador</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Olá, mundo!&quot;</span><span class="p">);</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="c1">// Espera 1 segundo</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Explicação do código:</strong><ul>
+<li><code>Serial.begin(9600);</code>: Inicializa a comunicação serial com uma taxa de 9600 bauds (bits por segundo). Essa taxa deve ser a mesma utilizada no Monitor Serial do IDE Arduino.</li>
+<li><code>Serial.println("Olá, mundo!");</code>: Envia a mensagem "Olá, mundo!" para o computador através da porta serial. A função <code>println()</code> adiciona um caractere de nova linha ao final da mensagem.</li>
+</ul>
+</li>
+<li><strong>Carregue o código para o Arduino.</strong></li>
+<li><strong>Abra o Monitor Serial</strong> no IDE Arduino (Ferramentas &gt; Monitor Serial).</li>
+</ol>
+<p>Você deverá ver a mensagem "Olá, mundo!" sendo exibida no Monitor Serial a cada segundo.</p>
+<h2 id="47-logica-e-aritmetica">4.7. Lógica e Aritmética</h2>
+<h3 id="operacoes-aritmeticas">Operações Aritméticas</h3>
+<p>O Arduino suporta as operações aritméticas básicas:</p>
+<ul>
+<li><strong>Adição:</strong> <code>+</code> (ex: <code>x = x + 1;</code>)</li>
+<li><strong>Subtração:</strong> <code>-</code> (ex: <code>x = x - 2;</code>)</li>
+<li><strong>Multiplicação:</strong> <code>*</code> (ex: <code>x = x * 3;</code>)</li>
+<li><strong>Divisão:</strong> <code>/</code> (ex: <code>x = x / 4;</code>)</li>
+<li><strong>Módulo (Resto da divisão):</strong> <code>%</code> (ex: <code>x = x % 5;</code>)</li>
+</ul>
+<h3 id="simbolos-compostos">Símbolos Compostos</h3>
+<p>Combinam operadores aritméticos com o operador de atribuição <code>=</code>, oferecendo uma forma concisa de modificar o valor de uma variável:</p>
+<ul>
+<li><strong>Incremento:</strong> <code>x++</code> (Equivalente a <code>x = x + 1;</code>)</li>
+<li><strong>Decremento:</strong> <code>x--</code> (Equivalente a <code>x = x - 1;</code>)</li>
+<li><strong>Adição e Atribuição:</strong> <code>x += y</code> (Equivalente a <code>x = x + y;</code>)</li>
+<li><strong>Subtração e Atribuição:</strong> <code>x -= y</code> (Equivalente a <code>x = x - y;</code>)</li>
+<li><strong>Multiplicação e Atribuição:</strong> <code>x *= y</code> (Equivalente a <code>x = x * y;</code>)</li>
+<li><strong>Divisão e Atribuição:</strong> <code>x /= y</code> (Equivalente a <code>x = x / y;</code>)</li>
+</ul>
+<h3 id="operadores-de-comparacao">Operadores de Comparação</h3>
+<p>Utilizados para comparar dois valores. O resultado da comparação é um valor booleano (<code>TRUE</code> ou <code>FALSE</code>):</p>
+<ul>
+<li><strong>Igual a:</strong> <code>==</code> (ex: <code>x == y</code>)</li>
+<li><strong>Diferente de:</strong> <code>!=</code> (ex: <code>x != y</code>)</li>
+<li><strong>Menor que:</strong> <code>&lt;</code> (ex: <code>x &lt; y</code>)</li>
+<li><strong>Maior que:</strong> <code>&gt;</code> (ex: <code>x &gt; y</code>)</li>
+<li><strong>Menor ou igual a:</strong> <code>&lt;=</code> (ex: <code>x &lt;= y</code>)</li>
+<li><strong>Maior ou igual a:</strong> <code>&gt;=</code> (ex: <code>x &gt;= y</code>)</li>
+</ul>
+<h3 id="operadores-logicos">Operadores Lógicos</h3>
+<p>Utilizados para combinar ou negar expressões booleanas:</p>
+<ul>
+<li><strong>AND (E lógico):</strong> <code>&amp;&amp;</code> (Retorna <code>TRUE</code> se ambas as expressões forem <code>TRUE</code>)
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="c1">// Executa se x for maior que 0 E menor que 10</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">}</span>
+</span></code></pre></div></li>
+<li><strong>OR (OU lógico):</strong> <code>||</code> (Retorna <code>TRUE</code> se pelo menos uma das expressões for <code>TRUE</code>)
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="c1">// Executa se x for igual a 0 OU y for igual a 0</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">}</span>
+</span></code></pre></div></li>
+<li><strong>NOT (NÃO lógico):</strong> <code>!</code> (Inverte o valor da expressão. Se a expressão for <code>TRUE</code>, <code>!expressão</code> será <code>FALSE</code>, e vice-versa)
+    <div class="language-c++ highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">buttonPin</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="c1">// Executa se o botão NÃO estiver pressionado (digitalRead retorna LOW)</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="p">}</span>
+</span></code></pre></div></li>
+</ul>
+<h1 id="funcoes-matematicas-e-de-tempo">Funções Matemáticas e de Tempo</h1>
+<p>Estas funções são essenciais para controlar o tempo e realizar cálculos matemáticos em seus projetos Arduino.</p>
+<table>
+<thead>
+<tr>
+<th>Função</th>
+<th>Exemplo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>delay(ms)</code></td>
+<td><code>delay(1000);</code> (pausa por 1 segundo)</td>
+<td>Pausa o programa por <code>ms</code> milissegundos.  Durante o delay, o Arduino não executa outras tarefas, mas as interrupções de hardware ainda podem ser processadas (embora o <code>delay()</code> possa afetar a precisão das interrupções). Use com moderação em aplicações que exigem alta responsividade.</td>
+</tr>
+<tr>
+<td><code>delayMicroseconds(us)</code></td>
+<td><code>delayMicroseconds(1000);</code> (pausa por 1 ms)</td>
+<td>Pausa o programa por <code>us</code> microssegundos. Similar a <code>delay()</code>, mas em uma escala de tempo menor. Útil para temporizações precisas, mas também impede a execução de outras tarefas.</td>
+</tr>
+<tr>
+<td><code>millis()</code></td>
+<td><code>long startTime = millis();</code>  <code>if (millis() - startTime &gt; 5000) { ... }</code></td>
+<td>Retorna o número de milissegundos desde que o Arduino iniciou o programa atual.  É útil para medir intervalos de tempo e executar tarefas periodicamente sem bloquear o programa. A variável retorna ao zero após aproximadamente 50 dias.</td>
+</tr>
+<tr>
+<td><code>micros()</code></td>
+<td><code>unsigned long timer_start = micros();</code></td>
+<td>Retorna o número de microssegundos desde o início do programa. Este número irá retornar ao zero (overflow) após aproximadamente 70 minutos. Em algumas placas Arduino, esta função tem uma resolução de alguns microssegundos.</td>
+</tr>
+<tr>
+<td><code>random(min, max)</code></td>
+<td><code>int valor = random(100, 400);</code></td>
+<td>Gera números pseudoaleatórios entre <code>min</code> (inclusivo) e <code>max</code> (exclusivo). Se você usar <code>randomSeed()</code> no início do seu programa, você pode obter diferentes sequências de números aleatórios a cada vez que o Arduino é ligado.</td>
+</tr>
+<tr>
+<td><code>randomSeed(seed)</code></td>
+<td><code>randomSeed(analogRead(0));</code></td>
+<td>Define o valor inicial (seed) para o gerador de números aleatórios. Usar uma entrada analógica não conectada como seed pode fornecer um valor mais imprevisível.</td>
+</tr>
+<tr>
+<td><code>abs(x)</code></td>
+<td><code>float valor = abs(-3.14);</code> (valor será 3.14)</td>
+<td>Retorna o valor absoluto de <code>x</code>. Funciona com <code>int</code>, <code>float</code> e outros tipos numéricos.</td>
+</tr>
+<tr>
+<td><code>constrain(x, a, b)</code></td>
+<td><code>sensorValue = constrain(sensorValue, 10, 100);</code></td>
+<td>Restringe um valor <code>x</code> entre os limites <code>a</code> e <code>b</code>. Se <code>x</code> for menor que <code>a</code>, retorna <code>a</code>. Se <code>x</code> for maior que <code>b</code>, retorna <code>b</code>. Caso contrário, retorna <code>x</code>.</td>
+</tr>
+<tr>
+<td><code>map(valor, min1, max1, min2, max2)</code></td>
+<td><code>int ledBrightness = map(analogRead(A0), 0, 1023, 0, 255);</code></td>
+<td>Converte <code>valor</code> de uma faixa (<code>min1</code> a <code>max1</code>) para outra faixa (<code>min2</code> a <code>max2</code>).  Pode ser usado para converter a leitura de um sensor para uma faixa de valores utilizável para controlar um atuador. Pode reverter faixas (ex: 1-100 para 100-1).</td>
+</tr>
+</tbody>
+</table>
+<h1 id="funcoes-para-controle-de-fluxo">Funções para Controle de Fluxo</h1>
+<p>Estas funções são essenciais para ditar a sequência em que as instruções são executadas dentro de um programa Arduino. Elas capacitam a criação de lógicas complexas e a tomada de decisões baseadas em condições específicas.</p>
+<p>A estrutura de controle <code>if</code> permite a execução condicional de um bloco de código. A sintaxe básica consiste em avaliar uma expressão; caso essa expressão seja considerada verdadeira (ou seja, avaliada como um valor diferente de zero), o bloco de código associado será executado. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">26</span><span class="p">;</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">fanPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"> </span><span class="c1">// Liga a ventoinha se a temperatura for maior que 25 graus</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>A construção <code>if...else</code> oferece uma bifurcação na execução do código. Se a expressão condicional for verdadeira, o primeiro bloco de código será executado; caso contrário, o bloco de código subsequente ao <code>else</code> será executado. Essa estrutura garante que precisamente um dos dois blocos de código seja executado. Observe o exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">digitalRead</span><span class="p">(</span><span class="n">buttonPin</span><span class="p">);</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">buttonState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HIGH</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"> </span><span class="c1">// Liga o LED se o botão estiver pressionado</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w">  </span><span class="c1">// Desliga o LED se o botão não estiver pressionado</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>A estrutura <code>if...else if...else</code> amplia a capacidade de testar múltiplas condições em ordem sequencial. Cada <code>else if</code> introduz uma nova condição a ser avaliada somente se as condições precedentes forem falsas. O bloco <code>else</code> final, sendo opcional, é executado apenas quando nenhuma das condições anteriores for satisfeita. Essa construção é valiosa para implementar lógicas de decisão mais complexas, como demonstrado no exemplo abaixo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">31</span><span class="p">;</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">fanPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"> </span><span class="c1">// Liga a ventoinha se a temperatura for maior que 30 graus</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">fanPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w">  </span><span class="c1">// Desliga a ventoinha se a temperatura for maior que 25 graus, mas não maior que 30</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// Espera 1 segundo se a temperatura for menor ou igual a 25 graus</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>A estrutura <code>switch...case</code> oferece uma alternativa eficiente para comparar uma variável (ou expressão que resulte em um valor inteiro) com uma lista de valores predefinidos. Cada valor possível é representado por uma cláusula <code>case</code>. Quando uma correspondência é encontrada, o bloco de código associado ao <code>case</code> correspondente é executado. A instrução <code>break</code> é crucial para evitar a execução dos <code>case</code> subsequentes. A cláusula <code>default</code>, opcional, é executada se nenhum dos <code>case</code> corresponder ao valor da variável. Veja o exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">sensorValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">sensorValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">led1</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">led2</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">  </span><span class="k">default</span><span class="o">:</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">led1</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">led2</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>As estruturas de repetição, como <code>while</code> e <code>do...while</code>, permitem a execução repetida de um bloco de código enquanto uma condição específica for mantida verdadeira. No caso do <code>while</code>, a condição é avaliada antes de cada execução do bloco de código. É imperativo garantir que a condição eventualmente se torne falsa, a fim de evitar um loop infinito. Observe o exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">27</span><span class="p">;</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">coolingSystem</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"> </span><span class="c1">// Liga o sistema de resfriamento</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">  </span><span class="n">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readTemperature</span><span class="p">();</span><span class="w">  </span><span class="c1">// Lê a nova temperatura</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="p">}</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="n">digitalWrite</span><span class="p">(</span><span class="n">coolingSystem</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"> </span><span class="c1">// Desliga o sistema de resfriamento quando a temperatura for menor ou igual a 25</span>
+</span></code></pre></div>
+<p>A estrutura <code>do...while</code> é semelhante ao <code>while</code>, com a distinção de que o bloco de código é executado ao menos uma vez, antes da primeira avaliação da condição. A repetição continua enquanto a condição permanecer verdadeira. Observe o exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">sensorValue</span><span class="p">;</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="n">sensorValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readSensor</span><span class="p">();</span><span class="w">  </span><span class="c1">// Lê o valor do sensor</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w">  </span><span class="c1">// Espera 100 milissegundos</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">sensorValue</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// Repete enquanto o valor do sensor for menor que 100</span>
+</span></code></pre></div>
+<p>A estrutura <code>for</code> é projetada para repetir um bloco de código um número predeterminado de vezes. Ela utiliza uma variável de controle que é inicializada, testada em cada iteração e incrementada (ou decrementada) após cada iteração. Essa estrutura é particularmente útil quando o número de repetições é conhecido de antemão. Observe o exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">  </span><span class="c1">// Imprime o valor de i na porta serial</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>O operador ternário <code>?</code> oferece uma forma concisa de expressar uma estrutura <code>if...else</code> simples em uma única linha de código. A expressão antes do <code>?</code> é avaliada; se for verdadeira, o valor da expressão será o valor após o <code>?</code>; caso contrário, será o valor após o <code>:</code>. Observe o exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">digitalRead</span><span class="p">(</span><span class="n">buttonPin</span><span class="p">);</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">buttonState</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">HIGH</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"> </span><span class="c1">// Liga o LED se o botão estiver pressionado, desliga caso contrário</span>
+</span></code></pre></div>
+<h1 id="portas-de-es-entradasaida-do-arduino">Portas de E/S (Entrada/Saída) do Arduino 🔌</h1>
+<p>O Arduino possui diversos pinos que permitem interagir com o mundo exterior, lendo dados de sensores (entradas) e controlando atuadores (saídas).</p>
+<h2 id="pinos-digitais">Pinos Digitais</h2>
+<p>São 14 pinos (0 a 13) que podem ser configurados como entrada ou saída de níveis lógicos digitais (HIGH/LOW) usando a função <code>pinMode()</code>. Um pino digital configurado como saída pode fornecer 5V (HIGH) ou 0V (LOW). Quando configurado como entrada, ele pode detectar se a tensão aplicada está próxima de 5V (HIGH) ou 0V (LOW).</p>
+<ul>
+<li><strong>Pinos 0 e 1:</strong> Usados para comunicação serial (TX/RX). Ao usar a comunicação serial, evite usar esses pinos para outras finalidades.</li>
+<li><strong>Pinos 2 e 3:</strong> Podem ser usados para interrupções externas com <code>attachInterrupt()</code>. Interrupções permitem que o Arduino responda a eventos externos de forma rápida e eficiente.</li>
+<li><strong>Pinos com PWM (3, 5, 6, 9, 10, 11):</strong> Podem gerar sinais analógicos simulados usando <code>analogWrite()</code>. PWM (Pulse Width Modulation) é uma técnica para variar a largura de um pulso digital, permitindo controlar a potência fornecida a um dispositivo, como o brilho de um LED ou a velocidade de um motor.</li>
+<li><strong>AREF:</strong> Pino para tensão de referência do conversor A/D. Usado para definir a tensão máxima que será lida pelos pinos analógicos. Por padrão, a tensão de referência é 5V, mas você pode usar uma tensão de referência externa para aumentar a precisão das leituras analógicas.</li>
+<li><strong>GND:</strong> Pino terra (Ground). Usado como referência de tensão zero para o Arduino e circuitos externos.</li>
+</ul>
+<h3 id="funcoes-para-pinos-digitais">Funções para Pinos Digitais:</h3>
+<p>As funções a seguir são utilizadas para configurar e interagir com os pinos digitais do Arduino.</p>
+<p>A função <code>pinMode(pino, modo)</code> é utilizada para configurar um pino digital específico (<code>pino</code>) para se comportar como uma entrada ou uma saída. O parâmetro <code>modo</code> define o comportamento do pino e pode ser <code>INPUT</code>, <code>OUTPUT</code> ou <code>INPUT_PULLUP</code>. A configuração como <code>INPUT_PULLUP</code> ativa um resistor interno que mantém o pino em nível lógico alto (HIGH) por padrão. Essa função é geralmente utilizada dentro da função <code>setup()</code> para inicializar a configuração dos pinos. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">pinMode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w">   </span><span class="c1">// Configura o pino 2 como saída</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">pinMode</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span><span class="w">    </span><span class="c1">// Configura o pino 4 como entrada</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">pinMode</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT_PULLUP</span><span class="p">);</span><span class="w"> </span><span class="c1">// Configura o pino 7 como entrada com resistor de pull-up</span>
+</span></code></pre></div>
+<p>A função <code>digitalRead(pino)</code> é utilizada para ler o estado lógico (HIGH ou LOW) de um pino digital específico (<code>pino</code>). O pino deve ser previamente configurado como <code>INPUT</code> ou <code>INPUT_PULLUP</code> para que a leitura seja precisa. A função retorna <code>HIGH</code> (1) se a tensão no pino estiver próxima de 5V, e <code>LOW</code> (0) se estiver próxima de 0V. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">digitalRead</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// Lê o estado do pino 3 e armazena na variável buttonState</span>
+</span></code></pre></div>
+<p>A função <code>digitalWrite(pino, valor)</code> é utilizada para definir o estado lógico (HIGH ou LOW) de um pino digital específico (<code>pino</code>). O pino deve ser previamente configurado como <code>OUTPUT</code> para que a função possa alterar o estado do pino. O parâmetro <code>valor</code> define o estado do pino e pode ser <code>HIGH</code> (5V) ou <code>LOW</code> (0V). Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w">  </span><span class="c1">// Define o pino 2 como HIGH (5V)</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">digitalWrite</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w">   </span><span class="c1">// Define o pino 5 como LOW (0V)</span>
+</span></code></pre></div>
+<p>A função <code>analogWrite(pino, valor)</code> é utilizada para enviar um sinal PWM (Pulse Width Modulation) para um pino PWM específico (<code>pino</code>), simulando uma saída analógica. O pino deve ser um pino PWM (3, 5, 6, 9, 10, 11). O parâmetro <code>valor</code> define a largura do pulso e varia de 0 a 255. O valor 0 desliga o pino (0V), o valor 255 liga o pino completamente (5V), e valores intermediários geram uma tensão proporcional. Não é necessário usar <code>pinMode()</code> para pinos PWM usados com <code>analogWrite()</code>. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">analogWrite</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">);</span><span class="w"> </span><span class="c1">// Envia um sinal PWM com valor 128 para o pino 10 (gera ~2.5V no pino 10)</span>
+</span></code></pre></div>
+<p>A função <code>attachInterrupt(pino_interruptor, ISR, modo)</code> é utilizada para associar uma função (ISR - Interrupt Service Routine) a uma interrupção externa em um pino específico (<code>pino_interruptor</code>). Quando ocorre uma interrupção no pino, a função ISR é executada. O parâmetro <code>pino_interruptor</code> é o número do pino digital (2 ou 3 no Arduino Uno). <code>ISR</code> é o nome da função a ser executada quando a interrupção ocorre. <code>modo</code> define quando a interrupção deve ser disparada e pode ser <code>LOW</code>, <code>CHANGE</code>, <code>RISING</code> ou <code>FALLING</code>. Utilize <code>digitalPinToInterrupt(pin)</code> para converter o número do pino digital para o número de interrupção correto. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">attachInterrupt</span><span class="p">(</span><span class="n">digitalPinToInterrupt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">buttonISR</span><span class="p">,</span><span class="w"> </span><span class="n">RISING</span><span class="p">);</span><span class="w"> </span><span class="c1">// Associa a função buttonISR à interrupção no pino 2, disparada na borda de subida</span>
+</span></code></pre></div>
+<p>A função <code>detachInterrupt(pino_interruptor)</code> é utilizada para desabilitar a interrupção em um pino específico (<code>pino_interruptor</code>). Após a chamada desta função, a função ISR associada ao pino não será mais executada quando ocorrer uma interrupção. Utilize <code>digitalPinToInterrupt(pin)</code> para converter o número do pino digital para o número de interrupção correto. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">detachInterrupt</span><span class="p">(</span><span class="n">digitalPinToInterrupt</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// Desabilita a interrupção no pino 2</span>
+</span></code></pre></div>
+<p>A função <code>pulseIn(pino, valor, espera)</code> é utilizada para medir a duração (em microssegundos) de um pulso (HIGH ou LOW) em um pino específico (<code>pino</code>). O parâmetro <code>valor</code> especifica o estado do pulso a ser medido (HIGH ou LOW). O parâmetro <code>espera</code> (timeout) é opcional e define o tempo máximo de espera em microssegundos. A função retorna a duração do pulso em microssegundos ou 0 se nenhum pulso for detectado dentro do tempo de espera. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pulseIn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"> </span><span class="c1">// Mede a duração de um pulso HIGH no pino 4</span>
+</span></code></pre></div>
+<h2 id="pinos-analogicos-analog-in">Pinos Analógicos (ANALOG IN)</h2>
+<p>São 6 pinos (A0 a A5) usados para ler sinais analógicos (0-5V). Não precisam ser configurados com <code>pinMode()</code> para leitura analógica. O conversor A/D interno tem 10 bits, resultando em valores de 0 a 1023. Podem também ser usados como pinos digitais (pinos 14 a 19). Por exemplo, <code>pinMode(14, OUTPUT)</code> configura A0 como saída digital.</p>
+<h3 id="funcao-para-pinos-analogicos">Função para Pinos Analógicos:</h3>
+<p>A função <code>analogRead(pino)</code> é utilizada para ler o valor analógico de um pino específico (<code>pino</code>, que pode ser A0-A5) e retorna um valor inteiro entre 0 e 1023, representando a tensão lida no pino. Por exemplo, <code>int sensor = analogRead(A0);</code> lê o valor analógico do pino A0 e armazena na variável <code>sensor</code>. Se a tensão em A0 for 2.5V, o valor retornado será próximo de 512. Os pinos analógicos A0-A5 também podem ser referenciados como pinos 14-19, portanto <code>analogRead(14)</code> é equivalente a <code>analogRead(A0)</code>.</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">potPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A0</span><span class="p">;</span><span class="w">    </span><span class="c1">// Pino analógico conectado ao potenciômetro</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">ledPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span><span class="w">     </span><span class="c1">// Pino PWM conectado ao LED</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w">  </span><span class="c1">// Configura o pino do LED como saída</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="p">}</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">potValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="n">potPin</span><span class="p">);</span><span class="w">           </span><span class="c1">// Lê o valor do potenciômetro (0-1023)</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ledBrightness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">potValue</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1023</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">);</span><span class="w"> </span><span class="c1">// Mapeia o valor para a faixa de PWM (0-255)</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">  </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span><span class="w"> </span><span class="n">ledBrightness</span><span class="p">);</span><span class="w">           </span><span class="c1">// Define o brilho do LED</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">                                    </span><span class="c1">// Pequeno delay para estabilizar a leitura</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="porta-serial-usb">Porta Serial (USB)</h2>
+<p>O conector USB permite comunicação serial com um computador e também pode alimentar o Arduino.</p>
+<h3 id="funcoes-para-porta-serial">Funções para Porta Serial:</h3>
+<p>As funções a seguir são utilizadas para configurar e interagir com a porta serial do Arduino.</p>
+<p>A função <code>Serial.begin(taxa)</code> habilita a comunicação serial e define a taxa de bits por segundo (bps), também conhecida como "baud rate". Essa taxa deve ser a mesma utilizada no Monitor Serial do IDE Arduino para que a comunicação seja estabelecida corretamente. Essa função é geralmente utilizada na função <code>setup()</code>. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w"> </span><span class="c1">// Inicializa a comunicação serial com uma taxa de 9600 bps</span>
+</span></code></pre></div>
+<p>É importante notar que os pinos 0 e 1 (RX e TX) não podem ser utilizados como pinos de entrada/saída digital quando a comunicação serial está habilitada.</p>
+<p>A função <code>Serial.end()</code> desabilita a porta serial, liberando os pinos 0 e 1 (RX e TX) para serem utilizados como pinos de entrada/saída digital. Essa função também é utilizada na função <code>setup()</code>. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">Serial</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="c1">// Desabilita a comunicação serial</span>
+</span></code></pre></div>
+<p>A função <code>Serial.available()</code> retorna o número de bytes (caracteres) disponíveis para leitura no buffer serial. Essa função é útil para verificar se há dados disponíveis para serem lidos antes de tentar ler da porta serial. Retorna 0 se não houver dados disponíveis. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">bytesAvailable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">();</span><span class="w"> </span><span class="c1">// Obtém o número de bytes disponíveis para leitura</span>
+</span></code></pre></div>
+<p>A função <code>Serial.read()</code> lê e retorna o primeiro byte disponível no buffer serial como um valor inteiro. Se não houver dados disponíveis, a função retorna -1. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">incomingByte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span><span class="w"> </span><span class="c1">// Lê o primeiro byte disponível no buffer serial</span>
+</span></code></pre></div>
+<p>A função <code>Serial.print(valor, formato)</code> envia dados (<code>valor</code>) para a porta serial. O parâmetro <code>formato</code> (opcional) especifica a base numérica para inteiros (BIN para binário, DEC para decimal, HEX para hexadecimal) ou o número de casas decimais para números de ponto flutuante. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="mf">1.23456</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">   </span><span class="c1">// Envia &quot;1.234&quot; para a porta serial</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">BIN</span><span class="p">);</span><span class="w">    </span><span class="c1">// Envia &quot;01000001&quot; para a porta serial</span>
+</span></code></pre></div>
+<p>A função <code>Serial.println(valor, formato)</code> é similar à função <code>Serial.print()</code>, mas adiciona um caractere de retorno de carro (<code>\r</code>) e uma nova linha (<code>\n</code>) ao final dos dados enviados, movendo o cursor para a próxima linha no Monitor Serial. Por exemplo:</p>
+<div class="language-c++ highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">A0</span><span class="p">));</span><span class="w"> </span><span class="c1">// Envia o valor lido do pino A0 para a porta serial, seguido de uma nova linha</span>
+</span></code></pre></div>
+<h1 id="pinos-de-alimentacao-power">Pinos de Alimentação (POWER)</h1>
+<p>Localizados geralmente próximos aos pinos analógicos, estes pinos fornecem diferentes opções de alimentação para o Arduino e dispositivos externos.</p>
+<ul>
+<li><strong>RESET:</strong> Conectar este pino ao terra (GND) reinicia o Arduino. É útil para resetar o microcontrolador sem desligar a alimentação.</li>
+<li><strong>3V3:</strong> Fornece uma saída de 3.3V com corrente máxima de 50mA. Pode ser usada para alimentar sensores e outros dispositivos que operam com essa tensão.</li>
+<li><strong>5V:</strong> Fornece uma saída de 5V. A corrente máxima disponível depende da fonte de alimentação do Arduino (USB ou Vin).</li>
+<li><strong>GND:</strong> Pinos de terra (Ground). Usados como referência de tensão zero para o Arduino e circuitos externos.</li>
+<li><strong>Vin:</strong> Entrada de tensão. Pode ser usada para alimentar o Arduino com uma fonte de tensão externa não regulada, tipicamente entre 7V e 12V (o datasheet pode especificar entre 9V e 15V, mas 7-12V é mais comum para evitar superaquecimento do regulador). A placa Arduino possui um regulador de tensão que converte essa tensão para 5V e 3.3V.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
